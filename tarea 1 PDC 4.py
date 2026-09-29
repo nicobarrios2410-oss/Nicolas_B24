@@ -15,7 +15,7 @@ def pedir_texto(mensaje):
         texto = input(mensaje).strip()
         if texto:
             return texto
-        print("⚠ Este campo no puede estar vacío.")
+        print(" Este campo no puede estar vacío.")
 
 
 def pedir_estado(mensaje="¿Ya lo leíste? (s/n): "):
@@ -26,7 +26,7 @@ def pedir_estado(mensaje="¿Ya lo leíste? (s/n): "):
             return True
         if respuesta in ("n", "no"):
             return False
-        print("⚠ Responde con 's' o 'n'.")
+        print(" Responde con 's' o 'n'.")
 
 
 def pedir_id(mensaje="ID del libro: "):
@@ -34,7 +34,7 @@ def pedir_id(mensaje="ID del libro: "):
     try:
         return int(input(mensaje).strip())
     except ValueError:
-        print("⚠ El ID debe ser un número.")
+        print(" El ID debe ser un número.")
         return None
 
 
@@ -64,7 +64,7 @@ def opcion_agregar():
     genero = pedir_texto("Género: ")
     leido = pedir_estado()
     id_nuevo = db.agregar_libro(titulo, autor, genero, leido)
-    print(f"✔ Libro agregado con ID {id_nuevo}.")
+    print(f" Libro agregado con ID {id_nuevo}.")
 
 
 def opcion_actualizar():
@@ -75,7 +75,7 @@ def opcion_actualizar():
 
     libro = db.obtener_libro(id_libro)
     if libro is None:
-        print("⚠ No existe un libro con ese ID.")
+        print(" No existe un libro con ese ID.")
         return
 
     _, titulo, autor, genero, leido = libro
@@ -89,7 +89,7 @@ def opcion_actualizar():
     nuevo_leido = (not leido) if cambiar in ("s", "si", "sí") else bool(leido)
 
     db.actualizar_libro(id_libro, nuevo_titulo, nuevo_autor, nuevo_genero, nuevo_leido)
-    print("✔ Libro actualizado correctamente.")
+    print(" Libro actualizado correctamente.")
 
 
 def opcion_eliminar():
@@ -100,12 +100,12 @@ def opcion_eliminar():
 
     libro = db.obtener_libro(id_libro)
     if libro is None:
-        print("⚠ No existe un libro con ese ID.")
+        print(" No existe un libro con ese ID.")
         return
 
     if pedir_estado(f"¿Seguro que quieres eliminar '{libro[1]}'? (s/n): "):
         db.eliminar_libro(id_libro)
-        print("✔ Libro eliminado.")
+        print(" Libro eliminado.")
     else:
         print("Operación cancelada.")
 
@@ -159,12 +159,12 @@ def main():
         opcion = input("Elige una opción: ").strip()
 
         if opcion == "6":
-            print("¡Hasta pronto! 👋")
+            print("¡Hasta pronto!")
             break
         elif opcion in acciones:
             acciones[opcion]()
         else:
-            print("⚠ Opción no válida. Intenta de nuevo.")
+            print("Opción no válida. Intenta de nuevo.")
 
 
 if __name__ == "__main__":
